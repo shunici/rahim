@@ -17,6 +17,8 @@
 			<header id="header">
 				<div class="logo"><a href="#">The Wedding <span style="color:darkgrey">Ahad 6 September 2020</span></a></div>
 			</header>
+		
+		
 
 		<!-- Main -->
 			<section id="main">
@@ -29,7 +31,8 @@
 							<img src="images/foto2.jpeg" alt="" />
 						</div>
 						<header class="special">
-							<h2>Abdurrahim  <br>& <br>	Nur Siti Rahmah</h2>						
+							<h2>Abdurrahim  <br>& <br>	Nur Siti Rahmah</h2>
+							<div>Waktu Acara Tinggal : <span id="toFriday"></span>						
 						</header>
 						<div class="inner" style="text-align: center; padding:5px">
 							<h3>Assalamu'alaikum Wr. Wb</h3>
@@ -52,6 +55,7 @@
 							<h2>Foto Galery</h2>
 							<p>Rahim & Rahmah</p>
 						</header>
+						
 						<div class="content">
 							<div class="gallery">
 								<div>
@@ -150,6 +154,41 @@
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+
+			function update(){
+
+			// Get current date and time
+			var today = new Date();
+
+			// Get number of days to Friday
+			var dayNum = today.getDay();
+			var daysToFri = 7 - (dayNum < 7? dayNum : dayNum - 7);
+
+			// Get milliseconds to noon friday
+			var fridayNoon = new Date(+today);
+			fridayNoon.setDate(fridayNoon.getDate() + daysToFri);
+			fridayNoon.setHours(12,0,0,0);
+			// Round up ms remaining so seconds remaining matches clock
+			var ms = Math.ceil((fridayNoon - today)/1000)*1000;
+			var d =  ms / 8.64e7 | 0;
+			var h = (ms % 8.64e7) / 3.6e6 | 0;
+			var m = (ms % 3.6e6)  / 6e4 | 0;
+			var s = (ms % 6e4)    / 1e3 | 0;
+
+			// Return remaining 
+			return d + ' hari ' + h + ' jam ' + m + ' menit ' + s + ' detik';
+			}
+
+			// Run update just after next full second
+			function runUpdate() {
+			var el = document.getElementById('toFriday');
+			el.innerHTML = update();
+			setTimeout(runUpdate, 1020 - (Date.now()%1000));
+			}
+
+			runUpdate();
+			</script>
 
 	</body>
 </html>
