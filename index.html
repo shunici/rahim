@@ -164,7 +164,7 @@
 
 			// Get number of days to Friday
 			var dayNum = today.getDay();
-			var daysToFri = 8 - (dayNum < 7? dayNum : dayNum - 7);
+			var daysToFri = 7.5 - (dayNum < 7? dayNum : dayNum - 7);
 
 			// Get milliseconds to noon friday
 			var fridayNoon = new Date(+today);
